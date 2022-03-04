@@ -28,9 +28,12 @@ namespace BookStore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddDbContext<BookStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("BookStoreContext")));
+
+            services.AddDefaultIdentity<DefaultUser>().AddEntityFrameworkStores<BookStoreContext>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<Cart>(sp => Cart.GetCart(sp));
@@ -63,6 +66,7 @@ namespace BookStore
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSession(); 
@@ -72,6 +76,7 @@ namespace BookStore
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Store}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
