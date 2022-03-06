@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using BookStore.Data;
 using BookStore.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookStore
 {
@@ -33,7 +34,7 @@ namespace BookStore
             services.AddDbContext<BookStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("BookStoreContext")));
 
-            services.AddDefaultIdentity<DefaultUser>().AddEntityFrameworkStores<BookStoreContext>();
+            services.AddDefaultIdentity<DefaultUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<BookStoreContext>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<Cart>(sp => Cart.GetCart(sp));
