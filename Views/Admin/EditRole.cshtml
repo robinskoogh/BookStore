@@ -1,0 +1,54 @@
+﻿@model BookStore.ViewModels.EditRoleViewModel
+
+@{
+    ViewData["Title"] = "Edit role";
+}
+
+<h1>Edit role</h1>
+
+<form method="post" class="row">
+    <div class="mt-3 col-4">
+        <div class="form-group row">
+            <label asp-for="Id" class="col-form-label col-2"></label>
+            <input asp-for="Id" disabled class="form-control col-9 p-1 text-center" style="font-size: 0.9em" />
+        </div>
+        <div class="form-group row">
+            <label asp-for="RoleName" class="col-form-label col-2"></label>
+            <input asp-for="RoleName" class="form-control col-9 p-2" />
+            <span asp-validation-for="RoleName" class="text-danger"></span>
+        </div>
+
+        @*<div asp-validation-summary="All" class="text-danger"></div>*@
+
+        <div class="form-group">
+            <a asp-action="ListAllRoles" class="btn btn-warning"><i class="fa-solid fa-angles-left"></i> Back</a>
+            <button type="submit" class="btn btn-success float-right mr-3">Update <i class="fa-solid fa-check-double"></i></button>
+        </div>
+    </div>
+    <div class="col-1"></div>
+    <div class="col-5">
+        <h3>Users with @Model.RoleName role</h3>
+
+        <table class="table table-striped col-8">
+            <tr></tr>
+            @if (Model.Users.Any())
+            {
+                foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td class="form-label">@user</td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td class="form-label">No users with @Model.RoleName role</td>
+                </tr>
+            }
+        </table>
+        <div>
+            <a asp-action="EditUsersInRole" asp-route-id="@Model.Id" class="btn btn-primary">Add/Remove users in role</a>
+        </div>
+    </div>
+</form>
