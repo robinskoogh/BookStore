@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BookStore.Data;
 using BookStore.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BookStore.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class BooksController : Controller
     {
         private readonly BookStoreContext _context;
@@ -19,6 +21,7 @@ namespace BookStore.Controllers
             _context = context;
         }
 
+        [AllowAnonymous]
         // GET: Books
         public async Task<IActionResult> Index()
         {

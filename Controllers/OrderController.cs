@@ -1,10 +1,12 @@
 ﻿using BookStore.Data;
 using BookStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace BookStore.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private readonly BookStoreContext _context;
