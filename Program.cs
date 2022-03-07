@@ -23,7 +23,10 @@ namespace BookStore
 
                 try
                 {
-                    SeedData.Initialize(services);
+                    // Initialize Roles and Users. This one will create a user with an Admin-role aswell as a separate User-role. See UserRoleInitializer.cs in Models
+                    //UserRoleInitializer.InitializeAsync(services).Wait();
+                    // Seed book data
+                    //SeedData.Initialize(services);
                 }
                 catch (Exception ex)
                 {
