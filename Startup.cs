@@ -13,6 +13,8 @@ using BookStore.Data;
 using BookStore.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using BookStore.Services;
 
 namespace BookStore
 {
@@ -34,8 +36,11 @@ namespace BookStore
             services.AddDbContext<BookStoreContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("BookStoreContext")));
 
-            services.AddDefaultIdentity<DefaultUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<BookStoreContext>();
+            services.AddDefaultIdentity<DefaultUser>()
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<BookStoreContext>();
 
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<Cart>(sp => Cart.GetCart(sp));
 
