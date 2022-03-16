@@ -7,18 +7,23 @@ namespace BookStore.Models
     public class DefaultUser : IdentityUser
     {
         [PersonalData]
+        [Required]
         public string FirstName { get; set; }
 
         [PersonalData]
+        [Required]
         public string LastName { get; set; }
 
         [PersonalData]
+        [Required]
         public string Address { get; set; }
 
         [PersonalData]
+        [Required]
         public string ZipCode { get; set; }
 
         [PersonalData]
+        [Required]
         public string City { get; set; }
 
         [PersonalData]
